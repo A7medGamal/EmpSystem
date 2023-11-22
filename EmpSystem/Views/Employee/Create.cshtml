@@ -1,0 +1,130 @@
+﻿@model EmpSystem.Models.EmployeeVM;
+@{
+    ViewBag.Title = "Create Employee";
+}
+@*<link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />*@
+<h2>Add Employee</h2>
+<form action="/Employee/Create" method="post" class="form-group">
+    <label> Name</label>
+    <input type="text" name="Name" class="form-control" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+    <br />
+    <label>Salary</label>
+    <input type="number" name="Salary" class="form-control" />
+    <span class="text-danger" asp-validation-for="Salary"></span>
+    <br />
+    <label>Adress</label>
+    <input type="text" name="Adress" class="form-control" />
+    <span class="text-danger" asp-validation-for="Adress"></span>
+    <br />
+    <label>Hire Date</label>
+    <input type="date" name="HireDate" class="form-control" />
+    <span class="text-danger" asp-validation-for="HireDate"></span>
+    <br />
+    <label>Email</label>
+    <input type="email" name="Email" class="form-control" />
+    <span class="text-danger" asp-validation-for="Email"></span>
+    <br />
+    
+    <label>Department</label>
+    <select asp-for="DepartmentId" asp-items="@(SelectList)ViewBag.DepartmentList">
+        <option>Chose Department</option>
+    </select>
+    <span class="text-danger" asp-validation-for="DepartmentId"></span>
+    <br /><br />
+    <label>Country</label>
+    <select id="CountryId" asp-items="@(SelectList)ViewBag.CountryList">
+        <option>Chose Country</option>
+    </select>
+    <br /><br />
+    <label>City</label>
+    <select id="CityId">
+        <option>Choose City</option>
+    </select>
+    <br /><br />
+ <label asp-for="DistrictId">District</label>
+    <select asp-for="DistrictId" >
+        <option>Chose District</option>
+    </select>
+
+
+
+    <br />
+
+
+    <center>
+        <input type="submit" value="save" class="btn btn-primary" style="display:block!important"/>
+    </center>
+</form>
+<style>
+    .btn{
+        display:none !important;
+    }
+</style>
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+
+    $(function () {
+
+        // Get City Data
+        $("#CountryId").change(function () {
+
+            $("#CityId").empty();
+            $("#CityId").append("<option>Choose City</option>");
+
+            var countryId = $("#CountryId").val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Employee/GetCityDataByCountryId",
+                data: { cntryId: countryId },
+                success: function (res) {
+                    
+                    $.each(res, function (i, e) {
+                       
+                        $("#CityId").append("<option value='" + e.id + "'>" + e.cityName + "</option>");
+
+                    });
+
+                }
+
+            });
+
+        });
+
+
+        // Get District Data
+        $("#CityId").change(function () {
+
+            $("#DistrictId").empty();
+            $("#DistrictId").append("<option>Choose District</option>");
+
+            var cityId = $("#CityId").val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Employee/GetDistrictDataByCityId",
+                data: { ctyId: cityId },
+                success: function (res) {
+
+                    $.each(res, function (i, e) {
+
+                        $("#DistrictId").append("<option value='" + e.id + "'>" + e.districtName + "</option>");
+
+                    });
+
+                }
+
+            });
+
+        });
+
+    });
+
+
+</script>

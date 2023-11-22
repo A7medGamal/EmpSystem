@@ -1,0 +1,43 @@
+﻿@model EmpSystem.Models.EmployeeVM;
+@{
+    ViewBag.Title = "Delete Employee";
+}
+<link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+<h2>Delete Employee</h2>
+<form asp-controller="Employee" asp-action="Delete" method="post" class="form-group">
+    <label> Name</label>
+    <input type="text" asp-for="Name" disabled class="form-control" />
+   
+    <br />
+    <label>Salary</label>
+    <input type="number" asp-for="Salary" disabled class="form-control" />
+   
+    <br />
+    <label>Adress</label>
+    <input type="text" asp-for="Adress" disabled class="form-control" />
+    
+    <br />
+    <label>Hire Date</label>
+    <input type="date" asp-for="HireDate" disabled class="form-control" />
+    
+    <br />
+    <label>Email</label>
+    <input type="email" asp-for="Email" disabled class="form-control" />
+    
+    <br />
+    <label>Department</label>
+    <select asp-for="DepartmentId" disabled asp-items="@(SelectList)ViewBag.DepartmentList">
+        <option>Chose Department</option>
+    </select>
+    
+    <br />
+
+
+    <center>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </center>
+</form>
+
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,43 @@
+﻿@model EmpSystem.Models.EmployeeVM;
+@{
+    ViewBag.Title = "Edit Employee";
+}
+<link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+<h2>Add Employee</h2>
+<form asp-controller="Employee" asp-action="Edit" method="post" class="form-group">
+    <label> Name</label>
+    <input type="text" asp-for="Name" class="form-control" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+    <br />
+    <label>Salary</label>
+    <input type="number" asp-for="Salary" class="form-control" />
+    <span class="text-danger" asp-validation-for="Salary"></span>
+    <br />
+    <label>Adress</label>
+    <input type="text" asp-for="Adress" class="form-control" />
+    <span class="text-danger" asp-validation-for="Adress"></span>
+    <br />
+    <label>Hire Date</label>
+    <input type="date" asp-for="HireDate" class="form-control" />
+    <span class="text-danger" asp-validation-for="HireDate"></span>
+    <br />
+    <label>Email</label>
+    <input type="email" asp-for="Email" class="form-control" />
+    <span class="text-danger" asp-validation-for="Email"></span>
+    <br />
+    <label>Department</label>
+    <select asp-for="DepartmentId" asp-items="@(SelectList)ViewBag.DepartmentList">
+        <option>Chose Department</option>
+    </select>
+    <span class="text-danger" asp-validation-for="DepartmentId"></span>
+    <br />
+
+
+    <center>
+        <input type="submit" value="Edit" class="btn btn-primary" />
+    </center>
+</form>
+
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

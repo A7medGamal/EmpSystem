@@ -1,0 +1,23 @@
+﻿@model EmpSystem.Models.DepartmentsVM;
+@{
+    ViewBag.Title = "Edit Department";
+}
+<h2>Edit Department</h2>
+<form  asp-controller="Department" asp-action="Edit" method="post" class="form-group">
+    <label>Department Name</label>
+    <input type="text" asp-for="DepatmentName" class="form-control" />
+    <span class="text-danger" asp-validation-for="DepatmentName"></span>
+    <br />
+    <label>Department Code</label>
+    <input type="number" asp-for="DepartmentCode" class="form-control" />
+    <span class="text-danger" asp-validation-for="DepartmentCode"></span>
+    <br />
+    <center>
+        <input type="submit" value="Edit" class="btn btn-primary" />
+    </center>
+</form>
+
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+ 
